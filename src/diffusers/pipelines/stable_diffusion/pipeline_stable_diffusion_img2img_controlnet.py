@@ -803,6 +803,8 @@ class StableDiffusionImg2ImgControlNetPipeline(DiffusionPipeline):
         shape = init_latents.shape
         noise = randn_tensor(shape, generator=generator, device=device, dtype=dtype)
 
+        print(shape)
+
         # get latents
         init_latents = self.scheduler.add_noise(init_latents, noise, timestep)
         latents = init_latents
