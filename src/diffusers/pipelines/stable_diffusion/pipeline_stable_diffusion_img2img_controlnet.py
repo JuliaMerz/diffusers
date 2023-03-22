@@ -21,6 +21,7 @@ import numpy as np
 import PIL.Image
 import torch
 from torch import nn
+from packaging import version
 from transformers import CLIPFeatureExtractor, CLIPTextModel, CLIPTokenizer
 
 from ...configuration_utils import FrozenDict
@@ -305,7 +306,9 @@ class StableDiffusionImg2ImgControlNetPipeline(DiffusionPipeline):
         self.register_to_config(requires_safety_checker=requires_safety_checker)
 
         self.image_processor = VaeImageProcessor(vae_scale_factor=self.vae_scale_factor)
-        self.register_to_config(requires_safety_checker=requires_safety_checker,)
+        self.register_to_config(
+            requires_safety_checker=requires_safety_checker,
+        )
 
     #     def enable_vae_slicing(self):
     #         r"""
@@ -475,7 +478,10 @@ class StableDiffusionImg2ImgControlNetPipeline(DiffusionPipeline):
                 attention_mask = None
 
             # SAME
-            prompt_embeds = self.text_encoder(text_input_ids.to(device), attention_mask=attention_mask,)
+            prompt_embeds = self.text_encoder(
+                text_input_ids.to(device),
+                attention_mask=attention_mask,
+            )
             prompt_embeds = prompt_embeds[0]
 
         prompt_embeds = prompt_embeds.to(dtype=self.text_encoder.dtype, device=device)
@@ -509,7 +515,11 @@ class StableDiffusionImg2ImgControlNetPipeline(DiffusionPipeline):
             max_length = prompt_embeds.shape[1]
             # SAME
             uncond_input = self.tokenizer(
-                uncond_tokens, padding="max_length", max_length=max_length, truncation=True, return_tensors="pt",
+                uncond_tokens,
+                padding="max_length",
+                max_length=max_length,
+                truncation=True,
+                return_tensors="pt",
             )
 
             if hasattr(self.text_encoder.config, "use_attention_mask") and self.text_encoder.config.use_attention_mask:
@@ -519,7 +529,8 @@ class StableDiffusionImg2ImgControlNetPipeline(DiffusionPipeline):
 
             # SAME
             negative_prompt_embeds = self.text_encoder(
-                uncond_input.input_ids.to(device), attention_mask=attention_mask,
+                uncond_input.input_ids.to(device),
+                attention_mask=attention_mask,
             )
             negative_prompt_embeds = negative_prompt_embeds[0]
 
@@ -825,7 +836,10 @@ class StableDiffusionImg2ImgControlNetPipeline(DiffusionPipeline):
 
     # override DiffusionPipeline
     def save_pretrained(
-        self, save_directory: Union[str, os.PathLike], safe_serialization: bool = False, variant: Optional[str] = None,
+        self,
+        save_directory: Union[str, os.PathLike],
+        safe_serialization: bool = False,
+        variant: Optional[str] = None,
     ):
         if isinstance(self.controlnet, ControlNetModel):
             super().save_pretrained(save_directory, safe_serialization, variant)
