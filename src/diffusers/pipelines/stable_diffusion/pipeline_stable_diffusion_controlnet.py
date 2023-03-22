@@ -660,6 +660,7 @@ class StableDiffusionControlNetPipeline(DiffusionPipeline):
         else:
             latents = latents.to(device)
 
+        print(latents.shape)
         # scale the initial noise by the standard deviation required by the scheduler
         latents = latents * self.scheduler.init_noise_sigma
         return latents
