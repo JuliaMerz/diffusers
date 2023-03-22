@@ -52,7 +52,7 @@ else:
         StableDiffusionDepth2ImgPipeline,
         StableDiffusionImageVariationPipeline,
         StableDiffusionImg2ImgPipeline,
-        StableDiffusionImg2ImgControlnetPipeline,
+        StableDiffusionImg2ImgControlNetPipeline,
         StableDiffusionInpaintPipeline,
         StableDiffusionInpaintPipelineLegacy,
         StableDiffusionInstructPix2PixPipeline,

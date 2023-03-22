@@ -46,7 +46,8 @@ else:
     from .pipeline_stable_diffusion import StableDiffusionPipeline
     from .pipeline_stable_diffusion_attend_and_excite import StableDiffusionAttendAndExcitePipeline
     from .pipeline_stable_diffusion_controlnet import StableDiffusionControlNetPipeline
-    from .pipeline_stable_diffusion_img2img_controlnet import StableDiffusionImg2ImgControlnetPipeline
+    from .pipeline_stable_diffusion_img2img import StableDiffusionImg2ImgPipeline
+    from .pipeline_stable_diffusion_img2img_controlnet import StableDiffusionImg2ImgControlNetPipeline
     from .pipeline_stable_diffusion_inpaint import StableDiffusionInpaintPipeline
     from .pipeline_stable_diffusion_inpaint_legacy import StableDiffusionInpaintPipelineLegacy
     from .pipeline_stable_diffusion_instruct_pix2pix import StableDiffusionInstructPix2PixPipeline
