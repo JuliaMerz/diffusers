@@ -852,6 +852,7 @@ class StableDiffusionImg2ImgControlNetPipeline(DiffusionPipeline):
         self,
         prompt: Union[str, List[str]] = None,
         img2img: Union[torch.FloatTensor, PIL.Image.Image] = None,
+        strength: float = 0.8,
         image: Union[torch.FloatTensor, PIL.Image.Image, List[torch.FloatTensor], List[PIL.Image.Image]] = None,
         height: Optional[int] = None,
         width: Optional[int] = None,
